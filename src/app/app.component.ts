@@ -19,8 +19,11 @@ export class AppComponent {
   }
   addUser() {
     event.preventDefault();
-    this._dataService.addUser(this.name).subscribe(res => {
-      this.name = '';
+    const newUser = {
+      name: this.name
+    };
+    this._dataService.addUser(newUser).subscribe(user => {
+      this.users.push(user);
     });
   }
 }

@@ -44,18 +44,17 @@ router.get('/users', (req, res) => {
 
 // Post users
 router.post('/users', (req, res) => {
-    console.log(req.body);
-    // connection((db) => {
-    //     db.collection('users')
-    //         .post(req.body)
-    //         .toArray()
-    //         .then((response) => {
-    //             // response.data = users;
-    //             res.json(response);
-    //         })
-    //         .catch((err) => {
-    //             sendError(err, res);
-    //         });
-    // });
-  })
+
+    connection((db) => {
+        db.collection('users')
+            .insertOne(req.body)
+            .then(users=> {
+                response.data = users;
+                res.json(response);
+            })
+            .catch((err) => {
+                sendError(err, res);
+            });
+    });
+})
 module.exports = router;
